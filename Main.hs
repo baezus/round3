@@ -5,38 +5,35 @@
 
 import System.FilePath
 import System.Directory
+import Data.List 
 import Prelude 
 
 main :: IO ()
 main = do
-    let rp = "reflex-platform/"
+    let refL = "reflex-platform/"
     let n = "/n"
     currentDir <- getCurrentDirectory 
-    print currentDir 
-    createDirectory rp
-    let z = aeU [currentDir, rp]
-    print z 
-    let x = aeU [rp, "github.json"]
-    let y = aeU [rp, "default.nix"]
-    let b = aeU [rp, "thunk.nix"]
-    -- setCurrentDirectory z
-    writeFile x n 
-    writeFile y n 
-    writeFile b n 
+    createDirectory refL
+    let jesus = [
+        aeU [refL, "github.json"]
+      , aeU [refL, "default.nix"]
+      , aeU [refL, "thunk.nix"]
+    ]
+    -- let jesus = [x, y, b]
+    let mary = [n, n, n]
+    sequence $ zipWith writeFile jesus mary 
+    -- let omg = map (:) [x, y, b]
+    -- print omg 
+    -- writeFile x n 
+    -- writeFile y n 
+    -- writeFile b n
     setCurrentDirectory currentDir  
     writeFile "default.nix" n 
     writeFile "shell.nix" n 
-    -- check12 <- getCurrentDirectory
-    -- print check12 
-    -- withCurrentDirectory currentDir $ writeFile x n
-    -- writeFile "default.nix" n 
-    -- writeFile "shell.nix" n
-    -- writeFile "reflex-platform/default.nix" n
-    -- writeFile x n
-    -- writeFile "reflex-platform/thunk.nix" n
 
 aeU :: [FilePath] -> FilePath
 aeU = joinPath
+
 
 -- create directory
 -- set to reflex-platform directory 
