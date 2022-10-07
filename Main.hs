@@ -11,26 +11,36 @@ import Prelude
 main :: IO ()
 main = do
     currentDir <- getCurrentDirectory 
+
     let {
       refL = "reflex-platform/"; 
       tH = "thunk.nix"; 
       gH = "github.json"; 
       dF = "default.nix"; 
       sH = "shell.nix";
-      aW = "/n"}
+      aW = "/n"
+    }
+
     createDirectory refL
-    
+
+    -- Writing reflex-platform directory. 
     withCurrentDirectory refL $ do
-      writeFile tH aW
-      writeFile gH aW
-      writeFile dF a3
+      wF dF a1
+      wF gH aW
+      wF tH aW
 
-    setCurrentDirectory currentDir   
-    writeFile dF aW
-    writeFile sH aW
+    -- Writing root directory.
+    wF dF aW
+    wF sH aW
 
--- a1
+wF :: FilePath -> String -> IO ()
+wF = writeFile 
+
+a1 = "import (import ./thunk.nix)"
 -- a2
-a3 = "import (import ./thunk.nix)"
+-- a3
 -- a4 = "(import ./reflex-platform {}).ghc.callCabal2nix "round3" ./. {}"
 -- a5
+
+-- If a is dF gH tH or sH, then aW will be a1 a2 a3 a4 a5.
+-- Make sure to distinguish between the two default.nix.
