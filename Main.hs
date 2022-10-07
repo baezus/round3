@@ -10,29 +10,41 @@ import Prelude
 
 main :: IO ()
 main = do
-    let refL = "reflex-platform/"
-    let n = "/n"
     currentDir <- getCurrentDirectory 
+    print currentDir 
     createDirectory refL
-    let jesus = [
-        aeU [refL, "github.json"]
-      , aeU [refL, "default.nix"]
-      , aeU [refL, "thunk.nix"]
-    ]
     -- let jesus = [x, y, b]
-    let mary = [n, n, n]
-    sequence $ zipWith writeFile jesus mary 
+    let mary = joseph 
+    print mary 
+    sequence $ zipWith writeFile pontius joseph 
     -- let omg = map (:) [x, y, b]
     -- print omg 
     -- writeFile x n 
     -- writeFile y n 
     -- writeFile b n
     setCurrentDirectory currentDir  
-    writeFile "default.nix" n 
-    writeFile "shell.nix" n 
+    writeFile "default.nix" "in default.nix" 
+    writeFile "shell.nix" "in shell.nix"
 
 aeU :: [FilePath] -> FilePath
 aeU = joinPath
+
+refL :: FilePath 
+refL = "/reflex-platform/"
+
+pontius :: [String]
+pontius = do {
+    x <- aeU [refL, "github.json"];
+    y <- aeU [refL, "default.nix"];
+    z <- aeU [refL, "thunk.nix"];
+    return [x, y, z] 
+}
+
+jesus :: [FilePath]
+jesus = pontius 
+
+joseph :: [String]
+joseph = ["github json", "default nix", "thunk nix"]
 
 
 -- create directory
