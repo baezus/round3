@@ -16,6 +16,7 @@ main = do
     -- let jesus = [x, y, b]
     let mary = joseph 
     print mary 
+    withCurrentDirectory refL $ do 
     sequence $ zipWith writeFile pontius joseph 
     -- let omg = map (:) [x, y, b]
     -- print omg 
@@ -30,7 +31,10 @@ aeU :: [FilePath] -> FilePath
 aeU = joinPath
 
 refL :: FilePath 
-refL = "/reflex-platform/"
+refL = "reflex-platform/"
+
+reflRoot :: FilePath 
+reflRoot = aeU ["round3/", refL]
 
 pontius :: [String]
 pontius = do {
@@ -44,7 +48,7 @@ jesus :: [FilePath]
 jesus = pontius 
 
 joseph :: [String]
-joseph = ["github json", "default nix", "thunk nix"]
+joseph = [" ", " ", " "]
 
 
 -- create directory
